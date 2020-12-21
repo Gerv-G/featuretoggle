@@ -8,6 +8,7 @@ plugins {
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'io.franzbecker.gradle-lombok' version '2.0'
+    id 'groovy'
     id 'java'
 }
 
@@ -22,10 +23,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.codehaus.groovy:groovy-all:2.3.11'
 
+    testImplementation 'org.spockframework:spock-spring:1.1-groovy-2.4'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.spockframework:spock-core:1.1-groovy-2.4'
 }
 
 test {
