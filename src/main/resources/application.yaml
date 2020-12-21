@@ -1,0 +1,4 @@
+featuretoggle:
+  features:
+    hello: true
+    goodbye: false
