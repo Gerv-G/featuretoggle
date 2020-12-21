@@ -14,7 +14,15 @@ class HelloWorldControllerTest extends Specification {
     @Autowired
     TestRestTemplate testRestTemplate
 
-    def "Should return hello world"() {
+    def "Unannotated endpoint should return expected response"() {
+        when:
+            def response = testRestTemplate.getForEntity("/unannotated", String.class)
+
+        then:
+            response.body == "Hello World"
+    }
+
+    def "Enabled toggleable feature should return expected response"() {
         when:
             def response = testRestTemplate.getForEntity("/hello", String.class)
 
@@ -22,9 +30,17 @@ class HelloWorldControllerTest extends Specification {
             response.body == "Hello World"
     }
 
-    def "Should return HTTP 404"() {
+    def "Disabled toggleable feature should return HTTP 404"() {
         when:
             def response = testRestTemplate.getForEntity("/goodbye", String.class)
+
+        then:
+            response.statusCode == HttpStatus.NOT_FOUND
+    }
+
+    def "Toggleable feature with no name should return HTTP 404"() {
+        when:
+            def response = testRestTemplate.getForEntity("/disableddefault", String.class)
 
         then:
             response.statusCode == HttpStatus.NOT_FOUND
